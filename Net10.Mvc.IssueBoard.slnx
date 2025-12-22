@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/ソリューション項目/">
+    <File Path="SQL/Samples_Issues_DDL.sql" />
+    <File Path="SQL/Samples_Issues_DML.sql" />
+  </Folder>
+  <Project Path="Net10.Mvc.IssueBoard/Net10.Mvc.IssueBoard.csproj" />
+</Solution>

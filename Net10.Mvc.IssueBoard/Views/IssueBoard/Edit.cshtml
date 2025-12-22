@@ -1,0 +1,76 @@
+@model Net10.Mvc.IssueBoard.Models.ViewModels.IssueEditViewModel
+
+@{
+    ViewData["Title"] = "課題内容編集";
+}
+
+<h1>課題内容編集</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="form-group mb-3">
+                <label asp-for="AuthorName" class="control-label"></label>
+                <input asp-for="AuthorName" class="form-control" readonly />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CreatedAt" class="control-label"></label>
+                <input type="text" value="@Model.CreatedAt.ToString("yyyy/MM/dd HH:mm:ss")" class="form-control" readonly />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Category" class="control-label"></label>
+                <input asp-for="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<Net10.Mvc.IssueBoard.Models.IssueStatus>()"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Resolution" class="control-label"></label>
+                <textarea asp-for="Resolution" class="form-control" rows="10"></textarea>
+                <span asp-validation-for="Resolution" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ResolverName" class="control-label"></label>
+                <input asp-for="ResolverName" class="form-control" />
+                <span asp-validation-for="ResolverName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ResolvedAt" class="control-label"></label>
+                <input type="text" value="@(Model.ResolvedAt?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")" class="form-control" readonly />
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="更新" class="btn btn-primary" />
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">戻る</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

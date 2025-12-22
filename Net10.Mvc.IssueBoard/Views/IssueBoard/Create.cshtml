@@ -1,0 +1,67 @@
+@model Net10.Mvc.IssueBoard.Models.ViewModels.IssueCreateViewModel
+
+@{
+    ViewData["Title"] = "課題新規登録";
+}
+
+<h1>課題新規登録</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="AuthorName" class="control-label"></label>
+                <input asp-for="AuthorName" class="form-control" id="authorNameInput" />
+                <span asp-validation-for="AuthorName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Category" class="control-label"></label>
+                <input asp-for="Category" class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="登録" class="btn btn-primary" id="submitButton" />
+                <a asp-action="Index" class="btn btn-secondary">戻る</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // ローカルストレージから記入者氏名を読み込む
+        document.addEventListener('DOMContentLoaded', function() {
+            var authorNameInput = document.getElementById('authorNameInput');
+            var savedAuthorName = localStorage.getItem('authorName');
+            
+            if (savedAuthorName && !authorNameInput.value) {
+                authorNameInput.value = savedAuthorName;
+            }
+
+            // フォーム送信時にローカルストレージに保存
+            document.getElementById('submitButton').addEventListener('click', function() {
+                var authorName = authorNameInput.value;
+                if (authorName) {
+                    localStorage.setItem('authorName', authorName);
+                }
+            });
+        });
+    </script>
+}

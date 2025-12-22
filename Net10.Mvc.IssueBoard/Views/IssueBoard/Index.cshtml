@@ -1,0 +1,41 @@
+@model IEnumerable<Net10.Mvc.IssueBoard.Models.ViewModels.IssueListViewModel>
+
+@{
+    ViewData["Title"] = "‰Û‘èˆê——";
+}
+
+<h1>‰Û‘èˆê——</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">‰Û‘è“o˜^</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>‹L“üÒ–¼</th>
+            <th>“o˜^“ú</th>
+            <th>ƒJƒeƒSƒŠ–¼</th>
+            <th>‰Û‘èƒ^ƒCƒgƒ‹</th>
+            <th>Œ»İ‚Ìó‹µ</th>
+            <th>‰ğŒˆ’S“–Ò–¼</th>
+            <th>ÅIŒ‹‰Ê“ú</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>@item.AuthorName</td>
+            <td>@item.CreatedAt.ToString("yyyy/MM/dd HH:mm")</td>
+            <td>@(item.Category ?? "")</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+            </td>
+            <td>@item.Status.GetDisplayName()</td>
+            <td>@(item.ResolverName ?? "")</td>
+            <td>@(item.ResolvedAt?.ToString("yyyy/MM/dd HH:mm") ?? "")</td>
+        </tr>
+}
+    </tbody>
+</table>
