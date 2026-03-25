@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Net10.Mvc.IssueBoard.Data;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args); 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
